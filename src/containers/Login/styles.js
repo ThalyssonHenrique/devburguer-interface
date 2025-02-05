@@ -60,6 +60,11 @@ export const AccessWith = styled.p`
 export const BoxInputs = styled.div`
   display: flex;
   flex-direction: column;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 export const Label = styled.p`

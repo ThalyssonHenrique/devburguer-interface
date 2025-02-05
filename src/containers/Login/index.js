@@ -1,4 +1,5 @@
 import React from 'react'
+import { useForm } from 'react-hook-form'
 
 import logo from '../../assets/logo.svg'
 import {
@@ -16,6 +17,14 @@ import {
 } from './styles'
 
 function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm()
+
+  const onSubmit = data => console.log(data)
+
   return (
     <Container>
       <Background>
@@ -31,13 +40,15 @@ function Login() {
         </AccessWith>
 
         <BoxInputs>
-          <Label> Email</Label>
-          <Input />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Label> Email</Label>
+            <Input type="email" {...register('email')} />
 
-          <Label>Password</Label>
-          <Input />
+            <Label>Password</Label>
+            <Input type="password" {...register('senha')} />
 
-          <Button>Sign In</Button>
+            <Button type="submit">Sign In</Button>
+          </form>
 
           <SignInLink>
             Don't have an account? <a>Sign Up</a>
