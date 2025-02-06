@@ -1,16 +1,16 @@
 import styled from 'styled-components'
 
 import backgroundLogo from '../../assets/fundo-devburger.svg'
-import backgroundAccess from '../../assets/background.svg'
 
 export const Container = styled.div`
   display: flex;
+  background-color: #202080;
 `
 
 export const Background = styled.div`
   background-image: url(${backgroundLogo});
   height: 100vh;
-  width: 46vw;
+  width: 50vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,9 +22,6 @@ export const Logo = styled.img`
 `
 
 export const ContainerItens = styled.div`
-  background-image: url(${backgroundAccess});
-  background-color: rgba(00, 0, 0, 0.5);
-  background-blend-mode: multiply;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,14 +70,21 @@ export const Label = styled.p`
   font-size: 13px;
   font-weight: 600;
   line-height: normal;
+  margin-top: 15px;
 `
 
 export const Input = styled.input`
   width: 340px;
   height: 35px;
   border-radius: 5px;
-  border: none;
-  margin-bottom: 25px;
+  border: ${props => (props.error ? '2px solid #cc1717' : 'none')};
+  margin-bottom: 3px;
+`
+
+export const ErrorMessage = styled.p`
+  font-size: 10px;
+  color: #cc1717;
+  font-weight: bold;
 `
 
 export const Button = styled.button`
