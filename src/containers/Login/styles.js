@@ -1,59 +1,44 @@
 import styled from 'styled-components'
 
-import backgroundLogo from '../../assets/fundo-devburger.svg'
+import backgroundWelcome from '../../assets/backgroundburger.png'
+import backgroundBurger from '../../assets/backgroundburger.png'
 
 export const Container = styled.div`
   display: flex;
-  background-color: #202080;
 `
 
 export const Background = styled.div`
-  background-image: url(${backgroundLogo});
+  background-image: url(${backgroundWelcome});
+  background-size: cover;
+  background-position: center;
   height: 100vh;
-  width: 50vw;
+  width: 46vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 `
 
+export const Welcome = styled.img`
+  width: 650px;
+`
+
 export const Logo = styled.img`
-  width: 500px;
+  width: 400px;
 `
 
 export const ContainerItens = styled.div`
+  background-image: url(${backgroundBurger});
+  background-size: cover;
+  background-position: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 170px;
+  justify-content: center;
   width: 54vw;
   height: 100vh;
 `
 
-export const Welcome = styled.p`
-  color: #fff;
-  font-size: 40px;
-  font-weight: 400;
-  line-height: 100%;
-
-  span {
-    color: #303030;
-    font-weight: bold;
-  }
-`
-
-export const AccessWith = styled.p`
-  color: #fff;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 100%;
-  margin-bottom: 80px;
-
-  span {
-    color: #303030;
-    font-weight: bold;
-  }
-`
 export const BoxInputs = styled.div`
   display: flex;
   flex-direction: column;
@@ -82,9 +67,10 @@ export const Input = styled.input`
 `
 
 export const ErrorMessage = styled.p`
-  font-size: 10px;
+  font-size: 13px;
   color: #cc1717;
   font-weight: bold;
+  margin-bottom: 5px;
 `
 
 export const Button = styled.button`
@@ -92,7 +78,7 @@ export const Button = styled.button`
   height: 40px;
   border-radius: 5px;
   border: none;
-  background-color: #303030;
+  background-color: #a4cb23;
   color: #fff;
   font-weight: bold;
   margin-top: 50px;
@@ -113,7 +99,7 @@ export const SignInLink = styled.p`
   margin-top: 30px;
 
   a {
-    color: #303030;
+    color: #a4cb23;
     text-decoration: underline;
     font-weight: bold;
     font-size: 20px;
