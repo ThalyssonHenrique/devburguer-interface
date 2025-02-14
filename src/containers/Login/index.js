@@ -4,12 +4,14 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
 import logo from '../../assets/logo.svg'
-import welcome from '../../assets/welcome1.png'
+import threeBurgers from '../../assets/three-burgers.png'
+import lanchesLogin from '../../assets/pizza-burger-login.png'
 
 import {
   Container,
   Background,
-  Welcome,
+  ThreeBurgers,
+  LanchesLogin,
   Logo,
   ContainerItens,
   BoxInputs,
@@ -44,7 +46,8 @@ function Login() {
   return (
     <Container>
       <Background>
-        <Welcome src={welcome} alt="logo dev burguer" />
+        <ThreeBurgers src={threeBurgers} alt="logo welcome" />
+        <LanchesLogin src={lanchesLogin} alt="logo dev burguer" />
       </Background>
 
       <ContainerItens>

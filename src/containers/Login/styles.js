@@ -16,11 +16,16 @@ export const Background = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 25px;
 `
 
-export const Welcome = styled.img`
-  width: 650px;
+export const LanchesLogin = styled.img`
+  width: 500px;
+`
+
+export const ThreeBurgers = styled.img`
+  width: 400px;
 `
 
 export const Logo = styled.img`
