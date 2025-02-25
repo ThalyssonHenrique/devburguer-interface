@@ -3,9 +3,11 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
+import Button from '../../components/button'
 import logo from '../../assets/logo.svg'
 import threeBurgers from '../../assets/three-burgers.png'
 import lanchesLogin from '../../assets/pizza-burger-login.png'
+import api from '../../services/api'
 
 import {
   Container,
@@ -18,7 +20,6 @@ import {
   Label,
   Input,
   ErrorMessage,
-  Button,
   SignInLink
 } from './styles'
 
@@ -41,7 +42,14 @@ function Login() {
     resolver: yupResolver(schema)
   })
 
-  const onSubmit = data => console.log(data)
+  const onSubmit = async clientData => {
+    const response = await api.post('/session', {
+      email: clientData.email,
+      password: clientData.password
+    })
+
+    console.log(response)
+  }
 
   return (
     <Container>
@@ -58,7 +66,7 @@ function Login() {
             <Input
               type="email"
               {...register('email')}
-              error={errors.password?.message}
+              $error={errors.email?.message}
             />
             <ErrorMessage>{errors.email?.message}</ErrorMessage>
 
@@ -66,7 +74,7 @@ function Login() {
             <Input
               type="password"
               {...register('password')}
-              error={errors.password?.message}
+              $error={errors.password?.message}
             />
             <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
