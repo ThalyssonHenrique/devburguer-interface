@@ -5,17 +5,14 @@ import * as yup from 'yup'
 
 import Button from '../../components/button'
 import logo from '../../assets/logo.svg'
-import threeBurgers from '../../assets/three-burgers.png'
-import lanchesLogin from '../../assets/pizza-burger-login.png'
 import api from '../../services/api'
 
 import {
   Container,
   Background,
-  ThreeBurgers,
-  LanchesLogin,
   Logo,
   ContainerItens,
+  RegisterHere,
   BoxInputs,
   Label,
   Input,
@@ -23,8 +20,9 @@ import {
   SignInLink
 } from './styles'
 
-function Login() {
+function Register() {
   const schema = yup.object().shape({
+    name: yup.string().required('Name is required'),
     email: yup
       .string()
       .email('enter a valid email')
@@ -32,7 +30,11 @@ function Login() {
     password: yup
       .string()
       .required('Password is required')
-      .min(6, 'The password must contain at least 6 characters')
+      .min(6, 'The password must contain at least 6 characters'),
+    confirmPassword: yup
+      .string()
+      .required('Password is required')
+      .oneOf([yup.ref('password')], 'passwords must be the same')
   })
   const {
     register,
@@ -43,7 +45,8 @@ function Login() {
   })
 
   const onSubmit = async clientData => {
-    const response = await api.post('/session', {
+    const response = await api.post('/users', {
+      name: clientData.name,
       email: clientData.email,
       password: clientData.password
     })
@@ -54,15 +57,22 @@ function Login() {
   return (
     <Container>
       <Background>
-        <ThreeBurgers src={threeBurgers} alt="three burgers" />
-        <LanchesLogin src={lanchesLogin} alt="lanches login" />
+        <Logo src={logo} alt="logo dev burguer" />
       </Background>
 
       <ContainerItens>
-        <Logo src={logo} alt="logo dev burguer" />
+        <RegisterHere>Register</RegisterHere>
         <BoxInputs>
           <form noValidate onSubmit={handleSubmit(onSubmit)}>
-            <Label> Email</Label>
+            <Label $error={errors.name?.message}> Name</Label>
+            <Input
+              type="text"
+              {...register('name')}
+              $error={errors.name?.message}
+            />
+            <ErrorMessage>{errors.name?.message}</ErrorMessage>
+
+            <Label $error={errors.email?.message}> Email</Label>
             <Input
               type="email"
               {...register('email')}
@@ -70,7 +80,7 @@ function Login() {
             />
             <ErrorMessage>{errors.email?.message}</ErrorMessage>
 
-            <Label>Password</Label>
+            <Label $error={errors.password?.message}>Password</Label>
             <Input
               type="password"
               {...register('password')}
@@ -78,13 +88,22 @@ function Login() {
             />
             <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
+            <Label $error={errors.confirmPassword?.message}>
+              Confirm Password
+            </Label>
+            <Input
+              type="password"
+              {...register('confirmPassword')}
+              $error={errors.confirmPassword?.message}
+            />
+            <ErrorMessage>{errors.confirmPassword?.message}</ErrorMessage>
+
             <Button type="submit" style={{ marginTop: 50, marginBottom: 30 }}>
-              Sign In
+              Sign Up
             </Button>
           </form>
-
           <SignInLink>
-            Don't have an account? <a>Sign Up</a>
+            Don't have an account? <a>Sign In</a>
           </SignInLink>
         </BoxInputs>
       </ContainerItens>
@@ -92,4 +111,4 @@ function Login() {
   )
 }
 
-export default Login
+export default Register

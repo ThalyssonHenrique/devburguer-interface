@@ -1,23 +1,23 @@
 import styled from 'styled-components'
 
-import backgroundLogin from '../../assets/backgroundburger.png'
-import backgroundBurger from '../../assets/backgroundburger.png'
+import backgroundRegister from '../../assets/register-background.jpg'
+import backgroundBurger from '../../assets/register-background.jpg'
 
 export const Container = styled.div`
   display: flex;
 `
 
 export const Background = styled.div`
-  background-image: url(${backgroundLogin});
+  background-image: url(${backgroundRegister});
   background-size: cover;
   background-position: center;
   height: 100vh;
-  width: 46vw;
+  width: 50vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding-top: 25px;
+  justify-content: center;
+  padding-top: 50px;
 `
 
 export const LanchesLogin = styled.img`
@@ -29,7 +29,7 @@ export const ThreeBurgers = styled.img`
 `
 
 export const Logo = styled.img`
-  width: 400px;
+  width: 600px;
 `
 
 export const ContainerItens = styled.div`
@@ -40,8 +40,13 @@ export const ContainerItens = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 54vw;
+  width: 50vw;
   height: 100vh;
+`
+
+export const RegisterHere = styled.h1`
+  color: #fff;
+  font-size: 100px;
 `
 
 export const BoxInputs = styled.div`
