@@ -2,6 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { toast } from 'react-toastify'
 
 import Button from '../../components/button'
 import logo from '../../assets/logo.svg'
@@ -17,7 +18,7 @@ import {
   Label,
   Input,
   ErrorMessage,
-  SignInLink
+  SignLink
 } from './styles'
 
 function Register() {
@@ -45,13 +46,52 @@ function Register() {
   })
 
   const onSubmit = async clientData => {
-    const response = await api.post('/users', {
-      name: clientData.name,
-      email: clientData.email,
-      password: clientData.password
-    })
-
-    console.log(response)
+    try {
+      const { status } = await api.post(
+        '/users',
+        {
+          name: clientData.name,
+          email: clientData.email,
+          password: clientData.password
+        },
+        {
+          validateStatus: () => true
+        }
+      )
+      if (status === 201 || status === 200) {
+        toast.success('Account created successfully! 🥳', {
+          position: 'top-right',
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored'
+        })
+      } else if (status === 409) {
+        toast.error('User already exists 🧐 ', {
+          position: 'top-right',
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored'
+        })
+      } else {
+        throw new Error()
+      }
+    } catch (err) {
+      toast.error('💀 System failure! Try again...', {
+        position: 'top-right',
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored'
+      })
+    }
   }
 
   return (
@@ -102,9 +142,9 @@ function Register() {
               Sign Up
             </Button>
           </form>
-          <SignInLink>
-            Don't have an account? <a>Sign In</a>
-          </SignInLink>
+          <SignLink>
+            Already have an account? <a>Sign In</a>
+          </SignLink>
         </BoxInputs>
       </ContainerItens>
     </Container>

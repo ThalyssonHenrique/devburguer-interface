@@ -2,6 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { toast } from 'react-toastify'
 
 import Button from '../../components/button'
 import logo from '../../assets/logo.svg'
@@ -20,7 +21,7 @@ import {
   Label,
   Input,
   ErrorMessage,
-  SignInLink
+  SignLink
 } from './styles'
 
 function Login() {
@@ -43,12 +44,50 @@ function Login() {
   })
 
   const onSubmit = async clientData => {
-    const response = await api.post('/session', {
-      email: clientData.email,
-      password: clientData.password
-    })
+    try {
+      const { status } = await api.post(
+        '/session',
+        {
+          email: clientData.email,
+          password: clientData.password
+        },
+        { validateStatus: () => true }
+      )
 
-    console.log(response)
+      if (status === 201 || status === 200) {
+        toast.success('😎 Welcome!', {
+          position: 'top-right',
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored'
+        })
+      } else if (status === 409) {
+        toast.error('🧐 Check your email and password ', {
+          position: 'top-right',
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored'
+        })
+      } else {
+        throw new Error()
+      }
+    } catch (err) {
+      toast.error('💀 System failure! Try again...', {
+        position: 'top-right',
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored'
+      })
+    }
   }
 
   return (
@@ -83,9 +122,9 @@ function Login() {
             </Button>
           </form>
 
-          <SignInLink>
+          <SignLink>
             Don't have an account? <a>Sign Up</a>
-          </SignInLink>
+          </SignLink>
         </BoxInputs>
       </ContainerItens>
     </Container>

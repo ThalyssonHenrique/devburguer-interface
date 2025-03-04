@@ -78,7 +78,7 @@ export const ErrorMessage = styled.p`
   margin-bottom: 5px;
 `
 
-export const SignInLink = styled.p`
+export const SignLink = styled.p`
   color: #fff;
 
   a {
